@@ -10,9 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/css/uikit.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div id="app">
+        <ul>
+            <li v-for="item in messageListValide"> {{ item }}</li>
+        </ul>
         <div class="uk-cover-container" uk-height-viewport>
             <!-- COVER (Background + Title + Content + Button) -->
             <img src="https://getuikit.com/docs/images/light.jpg" alt="" style="z-index: -2; opacity: .5;" uk-cover>
@@ -156,9 +161,47 @@
         el: "#app",
         data: {
             titre: "Boulette du bonheure",
-            message: "Hello World!"
+            message: "Hello World!",
+            messageList: [{message: 'test', status: 'valide'}, {message: 'OK', status: 'None'}],
+            happyMessage: {}
+        },
+        created: function(){
+            this.getHappynessList();
+        },
+        methods: {
+            getHappynessList() {
+                axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
+                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0' } })
+                .then(function (response) {
+                    this.messageList = response.data;
+                    // console.log(this.messageList);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            },
+
+            saveMessage() {
+                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', 
+                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0', 'content-type': 'application/json'}, body: {} })
+                .then(function (response) {
+                    this.happyMessage = getHappynessMessage();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            }
+        },
+        computed: {
+            messageListValide: function(){
+                return this.messageList.filter(function(item) { return item.status.match('valide')});
+            },
+
+            getHappynessMessage: function(){
+                return this.validMessages[0];
+            }
         }
-        });
+    }); 
     </script>
   
 </body>
