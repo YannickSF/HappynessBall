@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>La Boulette du Bonheur</title>
+  <title>Les boulettes du bonheur</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- VueJS import -->
@@ -12,6 +12,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <style>
+      .typeText{
+        font-size: 3rem;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: .08em solid black;
+        width: 0;
+        animation: typing 3s steps(18, end) forwards,
+        blink .5s step-end infinite alternate;
+        /* animation-iteration-count:infinite; */
+    }
+    @keyframes typing {
+        0% { width: 0 }
+        33% { width: 100% }
+        100% { width: 100% }
+    }
+    @keyframes blink  {	50%  { border-color: transparent } }
+  </style>
+
 </head>
 
 <body>
@@ -65,14 +85,14 @@
                         <!-- SLOGAN -->
                         <div class="uk-container uk-container-small uk-flex uk-flex-center uk-margin">
                             <blockquote cite="#" class="uk-column-span" style="margin: 30px 0;">
-                                <h2 class="uk-margin-remove-bottom">Recevez des messages du bonheur.</h2>
+                                <h2 class="typeText uk-margin-remove-bottom">{{ getHappynessMessage.message }}</h2>
                             </blockquote>
                         </div>
                         <!-- GET STARTED -->
                         <div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-right uk-grid">
                             <div class="uk-first-column">
-                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s" uk-toggle="target: .toggle-1">Commencer</a>
-                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s" uk-toggle="target: .toggle-1">Commencer</a>
+                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s uk-border-pill" uk-toggle="target: .toggle-1">Envoyez une boulette !</a>
+                                <!--<a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>-->
                             </div>
                         </div>
                     </div>
@@ -85,16 +105,17 @@
                                     <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
             
                                     <div class="uk-margin uk-overflow-auto">
-                                        <textarea class="uk-textarea" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none;"></textarea>
+                                        <textarea class="uk-textarea uk-border-rounded" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none; border: 1px solid rgba(0,0,0,.3); opacity: .95;"></textarea>
                                     </div>
                                     <p>{{ message }}</p>
                                 </fieldset>
-                                <button class="uk-button uk-button-primary" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
+                                <button class="uk-button uk-button-primary uk-border-pill" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
                             </form>
                         </div>
                     </div>
                     <div class="toggle-2" hidden>
-                        <p>{{ resolveMessage.message }}</p>
+                        <h2>{{ resolveMessage.message }}</h2>
+                        <p> Merci pour le bonheur envoyé :)</p>
                     </div>
                 </div>
               </div>
@@ -105,30 +126,32 @@
             <div class="uk-container uk-container-small">
                 <!-- SECTION NAME -->
                 <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
-                    Présentation
+                    Qu'est-ce que c'est ?
                 </h2>
                 <!-- DESCRIPTION -->
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Quel est notre but ?</p> -->
                 
                 <p class="uk-text-justify" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et sollicitudin risus. Nam placerat quam ac eros rhoncus, sed viverra metus rhoncus. Aliquam volutpat commodo fermentum. Aliquam dapibus ligula nisi, mattis faucibus nisl porta nec. Nulla nec ex imperdiet, placerat arcu non, vestibulum purus.
+                    Il m'est arrivée d'écrire des mots d'enouragements sur des tickets de caisses et de le placer dans les sacs des passants. 
                     <br><br>
-                    Mauris mauris urna, fringilla sed neque non, accumsan imperdiet augue. Etiam elementum, purus sit amet mollis bibendum, felis ex pellentesque ante, in gravida lectus metus et mi.
+                    Nous avons transposé le concepte dans une application et c'est très simple. 
+                    <br><br>
+                    A chaque fois que vous chargez cette page, vous recevez une "boulette du bonheur", une petite pensée affectueuse, motivante, gratifiante ou juste ce que vous aurez besoin de lire sur le moment pour vous rebooster. 
                     <br><br>
                 </p>
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.4">De quelle manière procédons-nous ?</p> -->
                 <div class="uk-container-xsmall uk-margin-auto uk-margin-large-top uk-child-width-expand@s uk-text-center" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: .desc-step; delay: 300; repeat: true">
                     <div class="desc-step" style="padding: 0 15px;">
                         <p><span uk-icon="icon: forward; ratio: 4"></span></p>
-                        <h4>Ecrivez un message</h4>
+                        <h4>Envoyer une boulette</h4>
                         <hr class="uk-divider-small">
-                        <p>Ecrivez votre message du bonheur a destination de quelqu'un d'autre</p>
+                        <p>Ecrivez votre boulette du bonheur et envoyez là. un autre utilisateur la recevra lors de sa venue sur le plateforme.</p>
                     </div>
                     <div class="desc-step uk-margin-left uk-margin-right" style="padding: 0 15px;" uk-scrollspy-class="uk-animation-slide-top">
                         <p><span uk-icon="icon: mail; ratio: 4"></span></p>
-                        <h4>Recevez un message</h4>
+                        <h4>Recevoir une boulette</h4>
                         <hr class="uk-divider-small">
-                        <p>Recevez le message du bonheur écrit par quelqu'un d'autre</p>
+                        <p>Chargez cette page et recevez une boulette du bonheur, écrite par quelqu'un d'autre.</p>
                     </div>
                 </div>
             </div>
@@ -141,9 +164,9 @@
                     <!-- LOGO -->
                     <div class="uk-width-auto uk-margin-auto-vertical">
                         <div class="uk-card uk-card-small uk-card-body uk-padding-remove">
-                            <a class="uk-h4" href="#">
-                            <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" width="35" uk-img>
-                            {{ titre }}
+                            <a class="uk-h5" href="#">
+                                <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" uk-img>
+                                {{ titre }} - Powered by Yannick S. F & Wako6 
                             </a>
                         </div>
                     </div>
@@ -161,10 +184,10 @@
     const vm = new Vue({
         el: "#app",
         data: {
-            titre: "Boulette du bonheure",
+            titre: "Les boulettes du bonheur",
             message: "",
             messageList: [],
-            resolveMessage: {}
+            resolveMessage: {},
         },
         created: function(){
             axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
@@ -186,15 +209,16 @@
                     console.log(error);
                 })
             }
+
         },
         computed: {
             messageListValide: function(){
-                return this.messageList.filter(function(item) { return (item.status != undefined && item.status.match('valide'))});
+                return this.messageList.filter((item) => (item.status != undefined && item.status == 'valide'));
             },
 
             getHappynessMessage: function(){
                 return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
-            }
+            },
         }
     });
 </script>
