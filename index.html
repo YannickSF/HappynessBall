@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>La Boulette du Bonheur</title>
+  <title>Les boulettes du bonheur</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- VueJS import -->
@@ -124,7 +124,7 @@
             <div class="uk-container uk-container-small">
                 <!-- SECTION NAME -->
                 <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
-                    Présentation
+                    Qu'est-ce que c'est ?
                 </h2>
                 <!-- DESCRIPTION -->
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Quel est notre but ?</p> -->
@@ -139,15 +139,15 @@
                 <div class="uk-container-xsmall uk-margin-auto uk-margin-large-top uk-child-width-expand@s uk-text-center" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: .desc-step; delay: 300; repeat: true">
                     <div class="desc-step" style="padding: 0 15px;">
                         <p><span uk-icon="icon: forward; ratio: 4"></span></p>
-                        <h4>Ecrivez un message</h4>
+                        <h4>Envoyez une boulette</h4>
                         <hr class="uk-divider-small">
-                        <p>Ecrivez votre message du bonheur a destination de quelqu'un d'autre</p>
+                        <p>Ecrivez votre boulette du bonheur et envoyez là. un autre utilisateur la recevra lors de sa venue sur le plateforme.</p>
                     </div>
                     <div class="desc-step uk-margin-left uk-margin-right" style="padding: 0 15px;" uk-scrollspy-class="uk-animation-slide-top">
                         <p><span uk-icon="icon: mail; ratio: 4"></span></p>
-                        <h4>Recevez un message</h4>
+                        <h4>Recevez une boulette</h4>
                         <hr class="uk-divider-small">
-                        <p>Recevez le message du bonheur écrit par quelqu'un d'autre</p>
+                        <p>Lorseque vous envoyez une boulette, vous recevrez la boulette que quelqu'un d'autre à lancé. </p>
                     </div>
                 </div>
             </div>
@@ -160,9 +160,9 @@
                     <!-- LOGO -->
                     <div class="uk-width-auto uk-margin-auto-vertical">
                         <div class="uk-card uk-card-small uk-card-body uk-padding-remove">
-                            <a class="uk-h4" href="#">
-                            <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" width="35" uk-img>
-                            {{ titre }}
+                            <a class="uk-h5" href="#">
+                                <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" uk-img>
+                                {{ titre }} - Powered by Yannick S. F & Wako6 
                             </a>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
     const vm = new Vue({
         el: "#app",
         data: {
-            titre: "Boulette du bonheure",
+            titre: "Les boulettes du bonheur",
             message: "",
             messageList: [],
             resolveMessage: {},
