@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>La Boulette du Bonheur</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- VueJS import -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- UIkit import -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/css/uikit.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="uk-cover-container" uk-height-viewport>
+            <!-- COVER (Background + Title + Content + Button) -->
+            <img src="https://getuikit.com/docs/images/light.jpg" alt="" style="z-index: -2; opacity: .5;" uk-cover>
+            <!-- NAVBAR -->
+            <nav class="uk-navbar-container" uk-sticky="top: 100; animation: uk-animation-slide-top" style="background-color: #0d4a36;" uk-navbar>
+                <div class="uk-navbar-left">
+                    <!-- LOGO -->
+                    <a class="uk-navbar-item uk-logo" style="color: white;" href="#" uk-scroll>
+                        <!-- <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo.png" width="50" uk-img> -->
+                        {{ titre }}
+                    </a>
+                </div>
+                <div class="uk-navbar-right uk-margin-small-right">
+                  <ul class="uk-navbar-nav">
+                      <li><a class="uk-navbar-toggle" style="color: white;" href="#offcanvas-menu" uk-toggle>
+                          <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
+                      </a></li>
+                  </ul>
+                </div>
+            </nav>
+            <!-- MENU -->
+            <div id="offcanvas-menu" uk-offcanvas="flip: true">
+                <div class="uk-offcanvas-bar">
+        
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+        
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="icon: menu"></span> Menu</li>
+                        <li class="uk-nav-divider"></li>
+                        <!-- <li class="uk-active"><a href="#">Active</a></li> -->
+                        <li><a href="#" uk-scroll><span class="uk-margin-small-right" uk-icon="icon: home"></span> Accueil</a></li>
+                        <li><a href="#description" uk-scroll><span class="uk-margin-small-right" uk-icon="icon: info"></span> Présentation</a></li>
+                    </ul>
+        
+                </div>
+            </div>
+            <!-- CONTENT -->
+            <div class="uk-section uk-section-small uk-padding-remove-top uk-flex uk-flex-middle uk-text-center" uk-height-viewport>
+              <div class="uk-width-1-1">
+                <div class="uk-container" uk-parallax="opacity: 1,0; y: 0,100">
+                    <!-- SECTION NAME -->
+                    <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
+                        {{ titre }}
+                    </h2>
+                    <!-- ACTION -->
+                    <div class="toggle-1">
+                        <!-- SLOGAN -->
+                        <div class="uk-container uk-container-small uk-flex uk-flex-center uk-margin">
+                            <blockquote cite="#" class="uk-column-span" style="margin: 30px 0;">
+                                <h2 class="uk-margin-remove-bottom">Recevez des messages du bonheur.</h2>
+                            </blockquote>
+                        </div>
+                        <!-- GET STARTED -->
+                        <div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-right uk-grid">
+                            <div class="uk-first-column">
+                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s" uk-toggle="target: .toggle-1">Commencer</a>
+                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s" uk-toggle="target: .toggle-1">Commencer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-1 toggle-2" hidden>
+                        <!-- MESSAGE -->
+                        <div class="uk-container uk-container-xsmall">
+                            <form ref="form" @submit.prevent="sendEmail">
+                                <fieldset class="uk-fieldset">
+            
+                                    <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
+            
+                                    <div class="uk-margin uk-overflow-auto">
+                                        <textarea class="uk-textarea" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none;"></textarea>
+                                    </div>
+                                    <p>{{ message }}</p>
+                                </fieldset>
+                                <button class="uk-button uk-button-primary" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="toggle-2" hidden>
+                        <p>{{ resolveMessage.message }}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- PRESENTATION -->
+        <div id="description" class="uk-section uk-section-default">
+            <div class="uk-container uk-container-small">
+                <!-- SECTION NAME -->
+                <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
+                    Présentation
+                </h2>
+                <!-- DESCRIPTION -->
+                <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Quel est notre but ?</p> -->
+                
+                <p class="uk-text-justify" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et sollicitudin risus. Nam placerat quam ac eros rhoncus, sed viverra metus rhoncus. Aliquam volutpat commodo fermentum. Aliquam dapibus ligula nisi, mattis faucibus nisl porta nec. Nulla nec ex imperdiet, placerat arcu non, vestibulum purus.
+                    <br><br>
+                    Mauris mauris urna, fringilla sed neque non, accumsan imperdiet augue. Etiam elementum, purus sit amet mollis bibendum, felis ex pellentesque ante, in gravida lectus metus et mi.
+                    <br><br>
+                </p>
+                <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.4">De quelle manière procédons-nous ?</p> -->
+                <div class="uk-container-xsmall uk-margin-auto uk-margin-large-top uk-child-width-expand@s uk-text-center" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: .desc-step; delay: 300; repeat: true">
+                    <div class="desc-step" style="padding: 0 15px;">
+                        <p><span uk-icon="icon: forward; ratio: 4"></span></p>
+                        <h4>Ecrivez un message</h4>
+                        <hr class="uk-divider-small">
+                        <p>Ecrivez votre message du bonheur a destination de quelqu'un d'autre</p>
+                    </div>
+                    <div class="desc-step uk-margin-left uk-margin-right" style="padding: 0 15px;" uk-scrollspy-class="uk-animation-slide-top">
+                        <p><span uk-icon="icon: mail; ratio: 4"></span></p>
+                        <h4>Recevez un message</h4>
+                        <hr class="uk-divider-small">
+                        <p>Recevez le message du bonheur écrit par quelqu'un d'autre</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="uk-section uk-section-secondary uk-padding-small uk-light">
+            <div class="uk-container">
+    
+                <div class="uk-text-center" uk-grid>
+                    <!-- LOGO -->
+                    <div class="uk-width-auto uk-margin-auto-vertical">
+                        <div class="uk-card uk-card-small uk-card-body uk-padding-remove">
+                            <a class="uk-h4" href="#">
+                            <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" width="35" uk-img>
+                            {{ titre }}
+                            </a>
+                        </div>
+                    </div>
+                    <!-- COPYRIGHT -->
+                    <div class="uk-width-expand">
+                        <div class="uk-card uk-card-small uk-card-body uk-padding-remove uk-text-right">©2021. Tous les droits sont réservés.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>  
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            titre: "Boulette du bonheure",
+            message: "",
+            messageList: [],
+            resolveMessage: {}
+        },
+        created: function(){
+            axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
+                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0' } })
+                .then(response => ( this.messageList = response.data) )
+                .catch(function (error) {
+                    console.log(error);
+                })
+        },
+        methods: {
+
+            saveMessage() {
+                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', {message: this.message, status: 'not_valide', 'id': ''}, 
+                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0', 'content-type': 'application/json'} })
+                .then(response => ( this.resolveMessage = this.getHappynessMessage ) )
+                .catch(function (error) {
+                    // fetch error
+                    // this.resolvemessage = {message: 'error'}
+                    console.log(error);
+                })
+            }
+        },
+        computed: {
+            messageListValide: function(){
+                return this.messageList.filter(function(item) { return (item.status != undefined && item.status.match('valide'))});
+            },
+
+            getHappynessMessage: function(){
+                return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
+            }
+        }
+    });
+</script>
+
+</html>
