@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HappynessBall</title>
+  <title>La Boulette du Bonheur</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- VueJS import -->
@@ -13,11 +13,9 @@
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
     <div id="app">
-        <ul>
-            <li v-for="item in messageListValide"> {{ item }}</li>
-        </ul>
         <div class="uk-cover-container" uk-height-viewport>
             <!-- COVER (Background + Title + Content + Button) -->
             <img src="https://getuikit.com/docs/images/light.jpg" alt="" style="z-index: -2; opacity: .5;" uk-cover>
@@ -87,15 +85,16 @@
                                     <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
             
                                     <div class="uk-margin uk-overflow-auto">
-                                        <textarea class="uk-textarea" rows="5" name="message" v-model="message" placeholder="Votre message" style="resize: none;"></textarea>
+                                        <textarea class="uk-textarea" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none;"></textarea>
                                     </div>
+                                    <p>{{ message }}</p>
                                 </fieldset>
-                                <button class="uk-button uk-button-primary" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
+                                <button class="uk-button uk-button-primary" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
                             </form>
                         </div>
                     </div>
                     <div class="toggle-2" hidden>
-                        <p>Get your Happyness!</p>
+                        <p>{{ resolveMessage.message }}</p>
                     </div>
                 </div>
               </div>
@@ -156,53 +155,48 @@
             </div>
         </div>
     </div>
-    <script>  
-        const vm = new Vue({
+</body>
+
+<script>  
+    const vm = new Vue({
         el: "#app",
         data: {
             titre: "Boulette du bonheure",
-            message: "Hello World!",
-            messageList: [{message: 'test', status: 'valide'}, {message: 'OK', status: 'None'}],
-            happyMessage: {}
+            message: "",
+            messageList: [],
+            resolveMessage: {}
         },
         created: function(){
-            this.getHappynessList();
-        },
-        methods: {
-            getHappynessList() {
-                axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
+            axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
                 { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0' } })
-                .then(function (response) {
-                    this.messageList = response.data;
-                    // console.log(this.messageList);
-                })
+                .then(response => ( this.messageList = response.data) )
                 .catch(function (error) {
                     console.log(error);
                 })
-            },
+        },
+        methods: {
 
             saveMessage() {
-                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', 
-                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0', 'content-type': 'application/json'}, body: {} })
-                .then(function (response) {
-                    this.happyMessage = getHappynessMessage();
-                })
+                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', {message: this.message, status: 'not_valide', 'id': ''}, 
+                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0', 'content-type': 'application/json'} })
+                .then(response => ( this.resolveMessage = this.getHappynessMessage ) )
                 .catch(function (error) {
+                    // fetch error
+                    // this.resolvemessage = {message: 'error'}
                     console.log(error);
                 })
             }
         },
         computed: {
             messageListValide: function(){
-                return this.messageList.filter(function(item) { return item.status.match('valide')});
+                return this.messageList.filter(function(item) { return (item.status != undefined && item.status.match('valide'))});
             },
 
             getHappynessMessage: function(){
-                return this.validMessages[0];
+                return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
             }
         }
-    }); 
-    </script>
-  
-</body>
+    });
+</script>
+
 </html>
