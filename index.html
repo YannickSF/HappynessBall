@@ -12,6 +12,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <style>
+      .typeText{
+        font-size: 3rem;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: .08em solid black;
+        width: 0;
+        animation: typing 3s steps(18, end) forwards,
+        blink .5s step-end infinite alternate;
+        /* animation-iteration-count:infinite; */
+    }
+    @keyframes typing {
+        0% { width: 0 }
+        33% { width: 100% }
+        100% { width: 100% }
+    }
+    @keyframes blink  {	50%  { border-color: transparent } }
+  </style>
 </head>
 
 <body>
@@ -65,14 +84,14 @@
                         <!-- SLOGAN -->
                         <div class="uk-container uk-container-small uk-flex uk-flex-center uk-margin">
                             <blockquote cite="#" class="uk-column-span" style="margin: 30px 0;">
-                                <h2 class="uk-margin-remove-bottom">Recevez des messages du bonheur.</h2>
+                                <h2 class="typeText uk-margin-remove-bottom">{{ getHappynessMessage.message }}</h2>
                             </blockquote>
                         </div>
                         <!-- GET STARTED -->
                         <div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-right uk-grid">
                             <div class="uk-first-column">
-                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s" uk-toggle="target: .toggle-1">Commencer</a>
-                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s" uk-toggle="target: .toggle-1">Commencer</a>
+                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
+                                <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
                             </div>
                         </div>
                     </div>
@@ -85,11 +104,11 @@
                                     <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
             
                                     <div class="uk-margin uk-overflow-auto">
-                                        <textarea class="uk-textarea" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none;"></textarea>
+                                        <textarea class="uk-textarea uk-border-rounded" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none; border: 1px solid rgba(0,0,0,.3); opacity: .95;"></textarea>
                                     </div>
                                     <p>{{ message }}</p>
                                 </fieldset>
-                                <button class="uk-button uk-button-primary" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
+                                <button class="uk-button uk-button-primary uk-border-pill" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
                             </form>
                         </div>
                     </div>
@@ -164,7 +183,8 @@
             titre: "Boulette du bonheure",
             message: "",
             messageList: [],
-            resolveMessage: {}
+            resolveMessage: {},
+            slogan: "Recevez un message du bonheur!"
         },
         created: function(){
             axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
@@ -186,6 +206,7 @@
                     console.log(error);
                 })
             }
+
         },
         computed: {
             messageListValide: function(){
@@ -194,6 +215,13 @@
 
             getHappynessMessage: function(){
                 return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
+            },
+            setMessage: function() {
+                // setInterval(() => {
+                //     this.slogan = this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)].message;
+                // }, 3005);
+                
+                // return this.slogan;
             }
         }
     });
