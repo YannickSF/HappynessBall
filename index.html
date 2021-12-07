@@ -33,6 +33,7 @@
     }
     @keyframes blink  {	50%  { border-color: transparent } }
   </style>
+
 </head>
 
 <body>
@@ -116,7 +117,8 @@
                         </div>
                     </div>
                     <div class="toggle-2" hidden>
-                        <p>{{ resolveMessage.message }}</p>
+                        <h2>{{ resolveMessage.message }}</h2>
+                        <p> Merci pour le bonheur envoyé :)</p>
                     </div>
                 </div>
               </div>
@@ -133,24 +135,26 @@
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Quel est notre but ?</p> -->
                 
                 <p class="uk-text-justify" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et sollicitudin risus. Nam placerat quam ac eros rhoncus, sed viverra metus rhoncus. Aliquam volutpat commodo fermentum. Aliquam dapibus ligula nisi, mattis faucibus nisl porta nec. Nulla nec ex imperdiet, placerat arcu non, vestibulum purus.
+                    Il m'est arrivée d'écrire des mots d'enouragements sur des tickets de caisses et de le placer dans les sacs des passants. 
                     <br><br>
-                    Mauris mauris urna, fringilla sed neque non, accumsan imperdiet augue. Etiam elementum, purus sit amet mollis bibendum, felis ex pellentesque ante, in gravida lectus metus et mi.
+                    Nous avons transposé le concepte dans une application et c'est très simple. 
+                    <br><br>
+                    A chaque fois que vous chargez cette page, vous recevez une "boulette du bonheur", une petite pensée affectueuse, motivante, gratifiante ou juste ce que vous aurez besoin de lire sur le moment pour vous rebooster. 
                     <br><br>
                 </p>
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.4">De quelle manière procédons-nous ?</p> -->
                 <div class="uk-container-xsmall uk-margin-auto uk-margin-large-top uk-child-width-expand@s uk-text-center" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: .desc-step; delay: 300; repeat: true">
                     <div class="desc-step" style="padding: 0 15px;">
                         <p><span uk-icon="icon: forward; ratio: 4"></span></p>
-                        <h4>Envoyez une boulette</h4>
+                        <h4>Envoyer une boulette</h4>
                         <hr class="uk-divider-small">
                         <p>Ecrivez votre boulette du bonheur et envoyez là. un autre utilisateur la recevra lors de sa venue sur le plateforme.</p>
                     </div>
                     <div class="desc-step uk-margin-left uk-margin-right" style="padding: 0 15px;" uk-scrollspy-class="uk-animation-slide-top">
                         <p><span uk-icon="icon: mail; ratio: 4"></span></p>
-                        <h4>Recevez une boulette</h4>
+                        <h4>Recevoir une boulette</h4>
                         <hr class="uk-divider-small">
-                        <p>Lorseque vous envoyez une boulette, vous recevrez la boulette que quelqu'un d'autre à lancé. </p>
+                        <p>Chargez cette page et recevez une boulette du bonheur, écrite par quelqu'un d'autre.</p>
                     </div>
                 </div>
             </div>
@@ -187,7 +191,6 @@
             message: "",
             messageList: [],
             resolveMessage: {},
-            slogan: "Recevez un message du bonheur!"
         },
         created: function(){
             axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
@@ -213,7 +216,7 @@
         },
         computed: {
             messageListValide: function(){
-                return this.messageList.filter(function(item) { return (item.status != undefined && item.status.match('valide'))});
+                return this.messageList.filter((item) => (item.status != undefined && item.status == 'valide'));
             },
 
             getHappynessMessage: function(){
