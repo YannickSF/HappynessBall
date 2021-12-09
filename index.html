@@ -25,7 +25,6 @@
                 blink .5s step-end infinite alternate;
                 /* animation-iteration-count:infinite; */
             }
-        }
     @keyframes typing {
         0% { width: 0 }
         33% { width: 100% }
@@ -96,6 +95,7 @@
                                 <!-- <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
                                 <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a> -->
                                 <a href="#" class="uk-button uk-button-danger uk-button-large uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
+
                             </div>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
 
             getHappynessMessage: function(){
                 return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
-            }
+            },
         }
     });
 </script>
