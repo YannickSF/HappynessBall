@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Les boulettes du bonheur</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- VueJS import -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <!-- UIkit import -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/css/uikit.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
-  <!-- Axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <style>
+<head>
+    <title>Les boulettes du bonheur</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- VueJS import -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- UIkit import -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.20/js/uikit-icons.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
         @media all and (min-width: 1200px) {
-            .typeText{
+            .typeText {
                 font-size: 3rem;
                 overflow: hidden;
                 white-space: nowrap;
                 border-right: .08em solid black;
                 width: 0;
-                animation: typing 3s steps(18, end) forwards,
-                blink .5s step-end infinite alternate;
+                animation: typing 3s steps(18, end) forwards, blink .5s step-end infinite alternate;
                 /* animation-iteration-count:infinite; */
             }
-    @keyframes typing {
-        0% { width: 0 }
-        33% { width: 100% }
-        100% { width: 100% }
-    }
-    @keyframes blink  {	50%  { border-color: transparent } }
-  </style>
+        }
+        
+        @keyframes typing {
+            0% {
+                width: 0
+            }
+            33% {
+                width: 100%
+            }
+            100% {
+                width: 100%
+            }
+        }
+        
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
+        }
+        
+        @keyframes typing {
+            0% {
+                width: 0
+            }
+            33% {
+                width: 100%
+            }
+            100% {
+                width: 100%
+            }
+        }
+        
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
+        }
+    </style>
+
 
 </head>
 
@@ -39,7 +71,7 @@
     <div id="app">
         <div class="uk-cover-container" uk-height-viewport>
             <!-- COVER (Background + Title + Content + Button) -->
-            <img src="https://getuikit.com/docs/images/light.jpg" alt="" style="z-index: -2; opacity: .5;" uk-cover>
+            <img src="https://picsum.photos/1000/600?grayscale" alt="" style="z-index: -2; opacity: .5;" uk-cover>
             <!-- NAVBAR -->
             <nav class="uk-navbar-container" uk-sticky="top: 100; animation: uk-animation-slide-top" style="background-color: #0d4a36;" uk-navbar>
                 <div class="uk-navbar-left">
@@ -50,19 +82,21 @@
                     </a>
                 </div>
                 <div class="uk-navbar-right uk-margin-small-right">
-                  <ul class="uk-navbar-nav">
-                      <li><a class="uk-navbar-toggle" style="color: white;" href="#offcanvas-menu" uk-toggle>
-                          <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
-                      </a></li>
-                  </ul>
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a class="uk-navbar-toggle" style="color: white;" href="#offcanvas-menu" uk-toggle>
+                                <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <!-- MENU -->
             <div id="offcanvas-menu" uk-offcanvas="flip: true">
                 <div class="uk-offcanvas-bar">
-        
+
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
-        
+
                     <ul class="uk-nav uk-nav-default">
                         <li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="icon: menu"></span> Menu</li>
                         <li class="uk-nav-divider"></li>
@@ -70,58 +104,59 @@
                         <li><a href="#" uk-scroll><span class="uk-margin-small-right" uk-icon="icon: home"></span> Accueil</a></li>
                         <li><a href="#description" uk-scroll><span class="uk-margin-small-right" uk-icon="icon: info"></span> Présentation</a></li>
                     </ul>
-        
+
                 </div>
             </div>
             <!-- CONTENT -->
             <div class="uk-section uk-section-small uk-padding-remove-top uk-flex uk-flex-middle uk-text-center" uk-height-viewport>
-              <div class="uk-width-1-1">
-                <div class="uk-container" uk-parallax="opacity: 1,0; y: 0,100">
-                    <!-- SECTION NAME -->
-                    <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
-                        {{ titre }}
-                    </h2>
-                    <!-- ACTION -->
-                    <div class="toggle-1">
-                        <!-- SLOGAN -->
-                        <div class="uk-container uk-container-small uk-flex uk-flex-center uk-margin">
-                            <blockquote cite="#" class="uk-column-span" style="margin: 30px 0;">
-                                <h2 class="typeText uk-margin-remove-bottom">{{ getHappynessMessage.message }}</h2>
-                            </blockquote>
-                        </div>
-                        <!-- GET STARTED -->
-                        <div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-right uk-grid">
-                            <div class="uk-first-column">
-                                <!-- <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
+                <div class="uk-width-1-1">
+                    <div class="uk-container" uk-parallax="opacity: 1,0; y: 0,100">
+                        <!-- SECTION NAME -->
+                        <h2 class="uk-text-uppercase uk-text-center" style="letter-spacing: .9vw; opacity: .3;">
+                            {{ titre }}
+                        </h2>
+                        <!-- ACTION -->
+                        <div class="toggle-1">
+                            <!-- SLOGAN -->
+                            <div class="uk-container uk-container-small uk-flex uk-flex-center uk-margin">
+                                <blockquote cite="#" class="uk-column-span" style="margin: 30px 0;">
+                                    <h2 class="typeText uk-margin-remove-bottom">{{ getHappynessMessage.message }}</h2>
+                                </blockquote>
+                            </div>
+                            <!-- GET STARTED -->
+                            <div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-right uk-grid">
+                                <div class="uk-first-column">
+                                    <!-- <a href="#" class="uk-button uk-button-danger tm-button-danger uk-button-large tm-button-large uk-visible@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
                                 <a href="#" class="uk-button uk-button-danger tm-button-danger uk-hidden@s uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a> -->
-                                <a href="#" class="uk-button uk-button-danger uk-button-large uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
-
+                                    <<<<<<< HEAD <a href="#" class="uk-button uk-button-danger uk-button-large uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a>
+                                </div>
+                                =======
+                                <a href="#" class="uk-button uk-button-danger uk-button-large uk-border-pill" uk-toggle="target: .toggle-1">Commencer</a> >>>>>>> cf8360a5b3b95042e273444801328a38ad3659c0
                             </div>
                         </div>
-                    </div>
-                    <div class="toggle-1 toggle-2" hidden>
-                        <!-- MESSAGE -->
-                        <div class="uk-container uk-container-xsmall">
-                            <form ref="form" @submit.prevent="sendEmail">
-                                <fieldset class="uk-fieldset">
-            
-                                    <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
-            
-                                    <div class="uk-margin uk-overflow-auto">
-                                        <textarea class="uk-textarea uk-border-rounded" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none; border: 1px solid rgba(0,0,0,.3); opacity: .95;"></textarea>
-                                    </div>
-                                    <p>{{ message }}</p>
-                                </fieldset>
-                                <button class="uk-button uk-button-primary uk-border-pill" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
-                            </form>
+                        <div class="toggle-1 toggle-2" hidden>
+                            <!-- MESSAGE -->
+                            <div class="uk-container uk-container-xsmall">
+                                <form ref="form" @submit.prevent="sendEmail">
+                                    <fieldset class="uk-fieldset">
+
+                                        <!-- <legend class="uk-legend uk-text-uppercase" style="opacity: .3;">Nous contacter</legend> -->
+
+                                        <div class="uk-margin uk-overflow-auto">
+                                            <textarea class="uk-textarea uk-border-rounded" rows="5" name="message" v-model="message" placeholder="Passez une belle journée :)" style="resize: none; border: 1px solid rgba(0,0,0,.3); opacity: .95;"></textarea>
+                                        </div>
+                                        <p>{{ message }}</p>
+                                    </fieldset>
+                                    <button class="uk-button uk-button-primary uk-border-pill" v-on:click="saveMessage()" type="button" uk-toggle="target: .toggle-2">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="toggle-2" hidden>
+                            <h2>{{ resolveMessage.message }}</h2>
+                            <p> Merci pour le bonheur envoyé :)</p>
                         </div>
                     </div>
-                    <div class="toggle-2" hidden>
-                        <h2>{{ resolveMessage.message }}</h2>
-                        <p> Merci pour le bonheur envoyé :)</p>
-                    </div>
                 </div>
-              </div>
             </div>
         </div>
         <!-- PRESENTATION -->
@@ -133,13 +168,11 @@
                 </h2>
                 <!-- DESCRIPTION -->
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Quel est notre but ?</p> -->
-                
+
                 <p class="uk-text-justify" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">
-                    Il m'est arrivée d'écrire des mots d'enouragements sur des tickets de caisses et de le placer dans les sacs des passants. 
-                    <br><br>
-                    Nous avons transposé le concepte dans une application et c'est très simple. 
-                    <br><br>
-                    A chaque fois que vous chargez cette page, vous recevez une "boulette du bonheur", une petite pensée affectueuse, motivante, gratifiante ou juste ce que vous aurez besoin de lire sur le moment pour vous rebooster. 
+                    Il m'est arrivée d'écrire des mots d'enouragements sur des tickets de caisses et de le placer dans les sacs des passants.
+                    <br><br> Nous avons transposé le concepte dans une application et c'est très simple.
+                    <br><br> A chaque fois que vous chargez cette page, vous recevez une "boulette du bonheur", une petite pensée affectueuse, motivante, gratifiante ou juste ce que vous aurez besoin de lire sur le moment pour vous rebooster.
                     <br><br>
                 </p>
                 <!-- <p class="uk-text-lead" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.4">De quelle manière procédons-nous ?</p> -->
@@ -162,20 +195,19 @@
         <!-- FOOTER -->
         <div class="uk-section uk-section-secondary uk-padding-small uk-light">
             <div class="uk-container">
-    
+
                 <div class="uk-text-center" uk-grid>
                     <!-- LOGO -->
                     <div class="uk-width-auto uk-margin-auto-vertical">
                         <div class="uk-card uk-card-small uk-card-body uk-padding-remove">
                             <a class="uk-h5" href="#">
-                                <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" uk-img>
-                                {{ titre }} - Powered by Yannick S. F & Wako6 
+                                <img class="uk-margin-small-right uk-margin-small-left" data-src="images/logo_white.png" uk-img> {{ titre }} - Powered by Yannick S. F & Wako6
                             </a>
                         </div>
                     </div>
                     <!-- COPYRIGHT -->
                     <div class="uk-width-expand">
-                        <div class="uk-card uk-card-small uk-card-body uk-padding-remove uk-text-right">©2021. Tous les droits sont réservés.</div>
+                        <div class="uk-card uk-card-small uk-card-body uk-padding-remove uk-text-right">©2022. Tous les droits sont réservés.</div>
                     </div>
                 </div>
             </div>
@@ -183,7 +215,7 @@
     </div>
 </body>
 
-<script>  
+<script>
     const vm = new Vue({
         el: "#app",
         data: {
@@ -192,36 +224,49 @@
             messageList: [],
             resolveMessage: {},
         },
-        created: function(){
-            axios.get('https://shareit-e2d7.restdb.io/rest/happyball', 
-                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0' } })
-                .then(response => ( this.messageList = response.data) )
-                .catch(function (error) {
+        created: function() {
+            axios.get('https://shareit-e2d7.restdb.io/rest/happyball', {
+                    headers: {
+                        'cache-control': 'no-cache',
+                        'x-apikey': '61aa6d7dc7048f219d10f8f0'
+                    }
+                })
+                .then(response => (this.messageList = response.data))
+                .catch(function(error) {
                     console.log(error);
                 })
         },
         methods: {
 
             saveMessage() {
-                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', {message: this.message, status: 'not_valide', 'id': ''}, 
-                { headers:  { 'cache-control': 'no-cache', 'x-apikey': '61aa6d7dc7048f219d10f8f0', 'content-type': 'application/json'} })
-                .then(response => ( this.resolveMessage = this.getHappynessMessage ) )
-                .catch(function (error) {
-                    // fetch error
-                    // this.resolvemessage = {message: 'error'}
-                    console.log(error);
-                })
+                axios.post('https://shareit-e2d7.restdb.io/rest/happyball', {
+                        message: this.message,
+                        status: 'not_valide',
+                        'id': ''
+                    }, {
+                        headers: {
+                            'cache-control': 'no-cache',
+                            'x-apikey': '61aa6d7dc7048f219d10f8f0',
+                            'content-type': 'application/json'
+                        }
+                    })
+                    .then(response => (this.resolveMessage = this.getHappynessMessage))
+                    .catch(function(error) {
+                        // fetch error
+                        // this.resolvemessage = {message: 'error'}
+                        console.log(error);
+                    })
             }
 
         },
         computed: {
-            messageListValide: function(){
+            messageListValide: function() {
                 return this.messageList.filter((item) => (item.status != undefined && item.status == 'valide'));
             },
 
-            getHappynessMessage: function(){
-                return this.messageListValide[Math.floor(Math.random()*this.messageListValide.length)];
-            },
+            getHappynessMessage: function() {
+                return this.messageListValide[Math.floor(Math.random() * this.messageListValide.length)];
+            }
         }
     });
 </script>
