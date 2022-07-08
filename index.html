@@ -25,7 +25,24 @@
                 animation: typing 3s steps(18, end) forwards, blink .5s step-end infinite alternate;
                 /* animation-iteration-count:infinite; */
             }
-            <<<<<<< HEAD
+        }
+        
+        @keyframes typing {
+            0% {
+                width: 0
+            }
+            33% {
+                width: 100%
+            }
+            100% {
+                width: 100%
+            }
+        }
+        
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
         }
         
         @keyframes typing {
@@ -46,9 +63,7 @@
             }
         }
     </style>
-    ======= @keyframes typing { 0% { width: 0 } 33% { width: 100% } 100% { width: 100% } } @keyframes blink { 50% { border-color: transparent } }
-    </style>
-    >>>>>>> cf8360a5b3b95042e273444801328a38ad3659c0
+
 
 </head>
 
